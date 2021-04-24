@@ -6,8 +6,9 @@ import axios from "axios";
 //gets all users
 
 export default{
-    search:function() {
-        return axios.get('https://randomuser.me/api/?results=10&inc=picture,name,email,phone,nat&nat=NO')
+    search:function(query) {
+        return axios.get('https://randomuser.me/api/?results=10&inc=picture,name,email,phone,nat&nat=NO'),
+        console.log(query)
     }
 }
 

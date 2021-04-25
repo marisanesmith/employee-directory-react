@@ -4,7 +4,7 @@
 // create another file in the utils folder where you will include the api.js for the URL of the api
 
 import React from 'react';
-
+import TableHtml from '../TableHtml'
 // function TableData(props) {
 //     <div>
 //         <tr>
@@ -16,7 +16,9 @@ import React from 'react';
 
 function TableData(props) {
   return (
-    <div className="text-center">
+    props.data.map(employee => (
+        <TableHtml
+        <div className="text-center">
     <tr>
       <img alt={props.picture.thumbnail} className="img-fluid" src={props.src} style={{ margin: "0 auto" }} />
       <td>{props.name.first}</td>
@@ -26,6 +28,9 @@ function TableData(props) {
 //    <td>{props.nat}</td>
       </tr>
     </div>
+    />
+    ))
+    
   );
 }
 

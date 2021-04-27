@@ -2,31 +2,27 @@
 
 // import TableData from "./components/TableData";
 
-// import React, { Component } from "react";
-import React from 'react';
+import React, { Component } from 'react';
 import "./style.css";
-// import API from "../../utils/api";
-// import TableData from "../TableData";
+import API from '../../utils/api';
 
-// class TableHtml extends Component {
-//   state = {
-//     result: {},
-//     search: ""
-//   };
-
-// componentDidMount() {
-//   this.employeeDirectory();
-// }
-
-// employeeDirectory = query => {
-//   API.search(query)
-//   .then(res => this.setState({ result: res.data }))
-//   .catch(err => console.log(err));
-// }
-// }
-
-function TableHtml({ picture, name, phone, email, nationality}) {
-    return (
+class TableHtml extends Component ({ picture, name, phone, email, nationality }) {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    this.searchEmployee();
+  }
+  
+  searchEmployee = () => {
+    API.getEmployee()
+    .then(employee => {
+        console.log(employee);
+        this.setState({ result: employee.data })})
+    .catch(err => console.log(err));
+  };
+  render (){
+  return (
         <table className="table table-striped">
         <thead>
           <tr>
@@ -60,7 +56,7 @@ function TableHtml({ picture, name, phone, email, nationality}) {
           </tr>
         </tbody>
       </table>
-  );
+  )};
 }
 
 export default TableHtml;

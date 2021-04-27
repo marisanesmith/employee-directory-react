@@ -11,7 +11,7 @@ function Search(props) {
         value={props.value}
         name="search"
         type="text" 
-        class="form-control" 
+        className="form-control" 
         placeholder="Search for an Employee"
         id="Search"
         aria-label="Sizing example input" 

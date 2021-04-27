@@ -5,16 +5,32 @@
 
 import React, { Component } from 'react';
 import TableHtml from '../TableHtml';
-import SearchBar from '../SearchBar';
+import API from '../../utils/api'
 
 class TableData extends Component {
-    constructor(props) {
-        super(props)
-    }
     state = {
-        result: {},
+        rows: [[]],
+        headings: ["Picture", "Name", "Email", "Phone", "Nationality"],
+        format: "",
         search: ""
     };
+
+      componentDidMount() {
+        this.searchEmployee();
+      }
+      
+      searchEmployee = () => {
+        API.getEmployee()
+        .then(employees => {
+            console.log(employees.data.results);
+            const rows = employees.data.results.map(employee => {
+                console.log(employee);
+                return [employee.picture.thumbnail, `${employee.name.first} ${employee.name.last}`, employee.email, employee.phone, employee.nat]})
+
+            console.log(rows);
+            this.setState({ rows })})
+        .catch(err => console.log(err));
+      };
 
     handleInputChange = event => {
         const value = event.target.value;
@@ -30,15 +46,13 @@ class TableData extends Component {
     };
 
     render() {
-        return this.props.data.map(employee => {
+         return (
             <TableHtml
-                image={employee.image}
-                name={employee.name}
-                email={employee.email}
-                phone={employee.phone}
-                nationality={employee.nationality}
+            headings={this.state.headings}
+            rows={this.state.rows}
+            format={this.state.format}
             />
-        })
+         )   
     };
 }
 

@@ -56,18 +56,4 @@ class TableData extends Component {
     };
 }
 
-    // function TableData(props) {
-    //   return (
-    //     props.data.map(employee => (
-    //         <TableHtml
-    //         image={employee.image}
-    //         name={employee.name}
-    //         email={employee.email}
-    //         phone={employee.phone}
-    //         nationality={employee.nationality}
-    //     />
-    //     ))
-    //     );
-    // }
-
     export default TableData;

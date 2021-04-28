@@ -1,4 +1,3 @@
-// where the html skeleton of the table will be
 
 // import TableData from "./components/TableData";
 

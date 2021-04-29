@@ -23,4 +23,7 @@ function Search(props) {
   );
 }
 
+//use filter method to narrow the search of employees down by name
+// use sort method to sort the names, etc in ascending or descending order
+
 export default Search;

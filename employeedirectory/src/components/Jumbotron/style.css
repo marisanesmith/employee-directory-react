@@ -1,0 +1,12 @@
+.jumbotron {
+    height: 300px;
+}
+
+h1 {
+    text-transform: uppercase;
+    color: teal;
+}
+
+p {
+    letter-spacing: .5px;
+}

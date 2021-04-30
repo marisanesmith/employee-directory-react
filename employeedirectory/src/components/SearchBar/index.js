@@ -5,7 +5,6 @@ function Search(props) {
     return (
     <form>
       <div className="input-group mb-3">
-        <span className="input-group-text" id="inputGroup-sizing-default">Search</span>
         <input 
         onChange={props.handleInputChange}
         value={props.value}

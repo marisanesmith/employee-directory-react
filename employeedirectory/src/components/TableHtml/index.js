@@ -18,8 +18,8 @@ function TableHtml (props)  {
             {headings.map(heading => <th scope="col">{heading}</th>)}
           </tr>
         </thead>
-        <tbody>      
-          {rows.map(row => <tr>{row.map(item => <td>{item}</td>)}</tr>)}
+        <tbody>   
+          {rows.map(row => <tr>{row.map(item => <td>{item}</td>)}</tr>)}   
         </tbody>
       </table>
   );

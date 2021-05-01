@@ -11,11 +11,11 @@ function SearchBar(props){
         value={props.search}
         name="search"
         type="text" 
-        className="form-control" 
+        className="form-control mb-3" 
         placeholder="Search for an Employee"
         id="search"
          />
-        {/* <button onClick={props.handleFormSubmit} className="btn btn-primary">Search</button> */}
+        {/* <button onClick={props.handleFormSubmit} className="btn btn-info">Search</button> */}
     </div>
     </div>
   </form>

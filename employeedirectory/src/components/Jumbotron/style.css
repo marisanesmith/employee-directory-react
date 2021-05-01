@@ -1,12 +1,15 @@
-.jumbotron {
-    height: 300px;
+.jumbo {
+    padding: 60px;
+    margin-bottom: 40px;
+    background-color: rgb(10, 107, 107);
 }
 
 h1 {
     text-transform: uppercase;
-    color: teal;
+    color: white;
 }
 
 p {
     letter-spacing: .5px;
+    color: white;
 }

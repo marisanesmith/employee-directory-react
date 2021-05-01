@@ -6,11 +6,11 @@ import TableData from "./components/TableData";
 import './App.css';
 
 function App() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState();
   return (
     <div className="App">
       <Jumbotron />
-      <SearchBar setSearch={setSearch}/>
+      <SearchBar setSearch={setSearch} />
       <TableData  search={search} />
     </div>
   );

@@ -7,7 +7,9 @@ function SearchBar(props){
       <div className="form-group search-widget">
       <div className="input-group mb-3">
         <input 
-        onChange={(e) => {props.setSearch(e.target.value)}}
+        onChange={(e) => {
+          console.log(e.target.value);
+          props.setSearch(e.target.value)}}
         value={props.search}
         name="search"
         type="text" 

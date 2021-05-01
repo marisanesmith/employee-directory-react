@@ -1,32 +1,47 @@
 import React, { Component } from 'react';
 import TableHtml from '../TableHtml';
-import API from '../../utils/api';
-// import SearchBar from '../SearchBar';
+import API from '../../utils/api'
 
 class TableData extends Component {
     state = {
         rows: [[]],
         headings: ["Picture", "Name", "Email", "Phone", "Nationality"],
         format: "",
-        filteredUsers: [{}]
+        employees: [],
     };
 
     componentDidMount() {
+        console.log(this.props.search);
         this.searchEmployee();
     }
-    
-    searchEmployee = () => {
-        API.getEmployee()
-        .then(employees => {
-            console.log(employees.data.results);
-            console.log(this.props.search);
-            const rows = employees.data.results.filter(employee => employee.name.first.toLowerCase().includes(this.props.search.toLowerCase()))
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.search !== prevProps.search) {
+            this.displayEmployees();
+        }  
+    }
+
+    displayEmployees = () => {
+        console.log(this.state.employees);
+        console.log(this.props.search);
+        if (this.state.employees) {
+            const rows = this.state.employees.filter(employee => employee.name.first.toLowerCase().includes(this.props.search))
             .map(employee => {
                 console.log(employee);
-                return [<img src={employee.picture.medium} className="rounded-circle" alt={employee.name}></img>, `${employee.name.first} ${employee.name.last}`, employee.email, employee.phone, employee.nat]})
-
-            console.log(rows);
-            this.setState({ rows, filteredUsers: employees.data })})
+                return [<img src={employee.picture.medium} className="rounded-circle" alt={employee.name}></img>, `${employee.name.first} ${employee.name.last}`, employee.email, employee.phone, employee.nat]
+            })
+                this.setState({ rows }) 
+        }
+        
+    }
+    
+    searchEmployee = async () => {
+        await API.getEmployee()
+        .then(employees => {
+            this.setState({ employees:employees.data.results }, () => {this.displayEmployees()}) 
+            console.log(employees.data.results);
+            // console.log(this.props.search); 
+            })
         .catch(err => console.log(err));
     };
 

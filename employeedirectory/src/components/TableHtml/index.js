@@ -1,7 +1,4 @@
 
-// import TableData from "./components/TableData";
-
-// import React, { Component } from 'react';
 import React from 'react';
 import "./style.css";
 

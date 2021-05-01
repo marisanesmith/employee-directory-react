@@ -1,19 +1,13 @@
-// where all the data for the table is handled (api call)
-// lifecycle method
-
-// create another file in the utils folder where you will include the api.js for the URL of the api
-
 import React, { Component } from 'react';
 import TableHtml from '../TableHtml';
 import API from '../../utils/api';
-import SearchBar from '../SearchBar';
+// import SearchBar from '../SearchBar';
 
 class TableData extends Component {
     state = {
         rows: [[]],
         headings: ["Picture", "Name", "Email", "Phone", "Nationality"],
         format: "",
-        search: "",
         filteredUsers: [{}]
     };
 
@@ -25,7 +19,9 @@ class TableData extends Component {
         API.getEmployee()
         .then(employees => {
             console.log(employees.data.results);
-            const rows = employees.data.results.map(employee => {
+            console.log(this.props.search);
+            const rows = employees.data.results.filter(employee => employee.name.first.toLowerCase().includes(this.props.search.toLowerCase()))
+            .map(employee => {
                 console.log(employee);
                 return [<img src={employee.picture.medium} className="rounded-circle" alt={employee.name}></img>, `${employee.name.first} ${employee.name.last}`, employee.email, employee.phone, employee.nat]})
 
@@ -47,64 +43,65 @@ class TableData extends Component {
     //     })
     // };
 
-    handleInputChange = event => {
-<<<<<<< HEAD
-        const value = event.target.value;
-        const name = event.target.name;
-        const filteredEmployee = this.state.rows.filter(item => {
-        const values = Object.values(item).join("").toLowerCase();
-        return values.indexOf(value.toLowerCase()) !== -1;
-        })
-        console.log(filteredEmployee);
 
-        this.setState({
-            [name]: value,
-            filteredUsers: filteredEmployee
-        })
-    };
-=======
-        if (event.target.name === "search") {
-            const searchTerm = event.target.value.toLowerCase();
-            this.setState({
-                search: searchTerm
-            })
-        }
-    }
->>>>>>> 9d0aa38f5958f0f32fea3b8637ed5f853d0042f3
+    // handleInputChange = event => {
 
-    // handleFormSubmit = event => {
-    //     event.preventDefault();
-    //     this.searchEmployee(this.state.search);
+    //     const value = event.target.value;
+    //     const name = event.target.name;
+    //     const filteredEmployee = this.state.rows.filter(item => {
+    //     const values = Object.values(item).join("").toLowerCase();
+    //     return values.indexOf(value.toLowerCase()) !== -1;
+    //     })
+    //     console.log(filteredEmployee);
+
+    //     this.setState({
+    //         [name]: value,
+    //         filteredUsers: filteredEmployee
+    //     })
     // };
-<<<<<<< HEAD
-=======
 
-    sortFName = () => {
-        const sortEmployees = this.state.results.sort((a,b) => {
-            if (b.name.first > a.name.first) {
-                return -1
-            }
-            if (a.name.first > b.name.first) {
-                return 1
-            }
-            return 0;
-        });
-        if (this.state.sortOrder === "DESC") {
-            sortEmployees.reverse();
-            this.setState({ sortOrder: "ASC" });
-        } else {
-            this.setState({ sortOrder: "DESC" });
-        }
-        this.setState({ results: sortEmployees })
-    }
+    //     if (event.target.name === "search") {
+    //         const searchTerm = event.target.value.toLowerCase();
+    //         this.setState({
+    //             search: searchTerm
+    //         })
+    //     }
+    // }
+
+    // handleInputChange = event => {
+    //     if (event.target.name === "search") {
+    //         const searchTerm = event.target.value.toLowerCase();
+    //         this.setState({
+    //             search: searchTerm
+    //         })
+    //     }
+    // }
+
+
+    // sortFName = () => {
+    //     const sortEmployees = this.state.results.sort((a,b) => {
+    //         if (b.name.first > a.name.first) {
+    //             return -1
+    //         }
+    //         if (a.name.first > b.name.first) {
+    //             return 1
+    //         }
+    //         return 0;
+    //     });
+    //     if (this.state.sortOrder === "DESC") {
+    //         sortEmployees.reverse();
+    //         this.setState({ sortOrder: "ASC" });
+    //     } else {
+    //         this.setState({ sortOrder: "DESC" });
+    //     }
+    //     this.setState({ results: sortEmployees })
+    // }
     
->>>>>>> 9d0aa38f5958f0f32fea3b8637ed5f853d0042f3
+
 
     render() {
         return (
-            <div>
-            <SearchBar handleInputChange={this.handleInputChange}
-            search={this.state.search} />    
+            <div>   
             <TableHtml
             headings={this.state.headings}
             rows={this.state.rows}

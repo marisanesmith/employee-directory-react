@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function Search(props) {
+function searchBar(props) {
     return (
     <form>
       <div className="input-group mb-3">
@@ -16,7 +16,7 @@ function Search(props) {
         aria-label="Sizing example input" 
         aria-describedby="inputGroup-sizing-default"/>
         <br />
-        <button onClick={props.handleFormSubmit} className="btn btn-primary">Search</button>
+        {/* <button onClick={props.handleFormSubmit} className="btn btn-primary">Search</button> */}
     </div>
   </form>
   );
@@ -25,4 +25,4 @@ function Search(props) {
 //use filter method to narrow the search of employees down by name
 // use sort method to sort the names, etc in ascending or descending order
 
-export default Search;
+export default searchBar;

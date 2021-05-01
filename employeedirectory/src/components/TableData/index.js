@@ -40,16 +40,18 @@ class TableData extends Component {
         const values = Object.values(item).join("").toLowerCase();
         return values.indexOf(value.toLowerCase()) !== -1;
         })
+        console.log(filteredEmployee);
+
         this.setState({
             [name]: value,
             filteredUsers: filteredEmployee
         })
     };
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        this.searchEmployee(this.state.search);
-    };
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     this.searchEmployee(this.state.search);
+    // };
 
     render() {
         return (

@@ -8,6 +8,7 @@ class TableData extends Component {
         headings: ["Picture", "Name", "Email", "Phone", "Nationality"],
         format: "",
         employees: [],
+        sort: "DESC",
     };
 
     componentDidMount() {
@@ -34,84 +35,35 @@ class TableData extends Component {
         }
         
     }
+
+    handleClick = () => {
+        if (this.state.sort === "DESC") {
+            this.setState({ sort: "ASCEND" })
+        } else {
+            this.setState({sort: "DESC"})
+        }
+        this.handleSort();
+    }
     
+    handleSort = () => {
+        const sortedArray = [...this.state.employees]
+        console.log(sortedArray);
+        if (this.sort === "DESC") {
+            sortedArray.sort((a,b) => a.name.first.localeCompare(b.name.first))
+        } else {
+            sortedArray.sort((a,b) => b.name.first.localeCompare(a.name.first))
+        }
+        this.setState({employees:sortedArray}, () => {this.displayEmployees()})
+        }
+
     searchEmployee = async () => {
         await API.getEmployee()
         .then(employees => {
             this.setState({ employees:employees.data.results }, () => {this.displayEmployees()}) 
             console.log(employees.data.results);
-            // console.log(this.props.search); 
             })
         .catch(err => console.log(err));
     };
-
-    // handleInputChange = event => {
-    //     const value = event.target.value;
-    //     const name = event.target.name;
-    //     const filteredEmployee = this.state.rows.filter(item => {
-    //     const values = Object.values(item).join("").toLowerCase();
-    //     return values.indexOf(name.toLowerCase()) !== -1;
-    //     })
-    //     this.setState({
-    //         [name]: value,
-    //         filteredUsers: filteredEmployee
-    //     })
-    // };
-
-
-    // handleInputChange = event => {
-
-    //     const value = event.target.value;
-    //     const name = event.target.name;
-    //     const filteredEmployee = this.state.rows.filter(item => {
-    //     const values = Object.values(item).join("").toLowerCase();
-    //     return values.indexOf(value.toLowerCase()) !== -1;
-    //     })
-    //     console.log(filteredEmployee);
-
-    //     this.setState({
-    //         [name]: value,
-    //         filteredUsers: filteredEmployee
-    //     })
-    // };
-
-    //     if (event.target.name === "search") {
-    //         const searchTerm = event.target.value.toLowerCase();
-    //         this.setState({
-    //             search: searchTerm
-    //         })
-    //     }
-    // }
-
-    // handleInputChange = event => {
-    //     if (event.target.name === "search") {
-    //         const searchTerm = event.target.value.toLowerCase();
-    //         this.setState({
-    //             search: searchTerm
-    //         })
-    //     }
-    // }
-
-
-    // sortFName = () => {
-    //     const sortEmployees = this.state.results.sort((a,b) => {
-    //         if (b.name.first > a.name.first) {
-    //             return -1
-    //         }
-    //         if (a.name.first > b.name.first) {
-    //             return 1
-    //         }
-    //         return 0;
-    //     });
-    //     if (this.state.sortOrder === "DESC") {
-    //         sortEmployees.reverse();
-    //         this.setState({ sortOrder: "ASC" });
-    //     } else {
-    //         this.setState({ sortOrder: "DESC" });
-    //     }
-    //     this.setState({ results: sortEmployees })
-    // }
-    
 
 
     render() {
@@ -119,6 +71,7 @@ class TableData extends Component {
             <div>   
             <TableHtml
             headings={this.state.headings}
+            click={this.handleClick}
             rows={this.state.rows}
             format={this.state.format}
             />

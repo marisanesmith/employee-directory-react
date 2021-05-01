@@ -1,19 +1,13 @@
-// where all the data for the table is handled (api call)
-// lifecycle method
-
-// create another file in the utils folder where you will include the api.js for the URL of the api
-
 import React, { Component } from 'react';
 import TableHtml from '../TableHtml';
 import API from '../../utils/api';
-import SearchBar from '../SearchBar';
+// import SearchBar from '../SearchBar';
 
 class TableData extends Component {
     state = {
         rows: [[]],
         headings: ["Picture", "Name", "Email", "Phone", "Nationality"],
         format: "",
-        search: "",
         filteredUsers: [{}]
     };
 
@@ -25,7 +19,9 @@ class TableData extends Component {
         API.getEmployee()
         .then(employees => {
             console.log(employees.data.results);
-            const rows = employees.data.results.map(employee => {
+            console.log(this.props.search);
+            const rows = employees.data.results.filter(employee => employee.name.first.toLowerCase().includes(this.props.search.toLowerCase()))
+            .map(employee => {
                 console.log(employee);
                 return [<img src={employee.picture.medium} className="rounded-circle" alt={employee.name}></img>, `${employee.name.first} ${employee.name.last}`, employee.email, employee.phone, employee.nat]})
 
@@ -47,14 +43,14 @@ class TableData extends Component {
     //     })
     // };
 
-    handleInputChange = event => {
-        if (event.target.name === "search") {
-            const searchTerm = event.target.value.toLowerCase();
-            this.setState({
-                search: searchTerm
-            })
-        }
-    }
+    // handleInputChange = event => {
+    //     if (event.target.name === "search") {
+    //         const searchTerm = event.target.value.toLowerCase();
+    //         this.setState({
+    //             search: searchTerm
+    //         })
+    //     }
+    // }
 
     // handleFormSubmit = event => {
     //     event.preventDefault();
@@ -83,9 +79,7 @@ class TableData extends Component {
 
     render() {
         return (
-            <div>
-            <SearchBar handleInputChange={this.handleInputChange}
-            search={this.state.search} />    
+            <div>   
             <TableHtml
             headings={this.state.headings}
             rows={this.state.rows}

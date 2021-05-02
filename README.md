@@ -11,12 +11,12 @@
 
 ## Project Overview
 
-This application is a fully functional budget tracker app where users can add funds or subtract funds so that they can keep track of their finances. The budget tracker can save data while offline and then when back online that data will be saved to the database. 
+This application provides a way for Employers to search through their employee database with ease. Employers will be able to filter through their Employees by typing names into the search bar. They are also able to see a list of names in ascending or descending order.
 
-![Budget App Home Page](public/images/budget.png)
+![Employee Directory Home Page](public/images/employee.png)
 
 ## Application
-[Budget App Heroku Link](https://pure-peak-80351.herokuapp.com)
+[Live GitHub pages link](https://marisanesmith.github.io/employee-directory-react/)
 
 ## Installation
 

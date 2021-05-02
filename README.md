@@ -13,7 +13,7 @@
 
 This application provides a way for Employers to search through their employee database with ease. Employers will be able to filter through their Employees by typing names into the search bar. They are also able to see a list of names in ascending or descending order.
 
-![Employee Directory Home Page](public/images/employee.png)
+![Employee Directory Home Page](./employeedirectory/public/images/employee.png)
 
 ## Application
 [Live GitHub pages link](https://marisanesmith.github.io/employee-directory-react/)
